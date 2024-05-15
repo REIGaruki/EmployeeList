@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public class EmployeeService {
-    List<Employee> employees = new ArrayList<Employee>();
+    List<Employee> employees = new ArrayList<>();
     private final int MAX_EMPLOYEE_QUANTITY = 5;
 
     public String addEmployee(String firstName, String lastName) {
@@ -20,18 +20,19 @@ public class EmployeeService {
             } else {
                 throw new EmployeeAlreadyAddedException("Employee already added");
             }
-        } catch (EmployeeStorageIsFullException e) {
-            return e.getMessage();
-        } catch (EmployeeAlreadyAddedException e) {
+        } catch (EmployeeStorageIsFullException | EmployeeAlreadyAddedException e) {
             return e.getMessage();
         }
     }
     public String removeEmployee(String firstName, String lastName) {
         try {
-            Employee employee = findByName(firstName, lastName);
-            employees.remove(employee);
-            return "Employee removed";
-        } catch (NullPointerException e) {
+            if (findByName(firstName,lastName) != null) {
+                employees.remove(findByName(firstName,lastName));
+                return "Employee removed";
+            } else {
+                throw new EmployeeNotFoundException();
+            }
+        } catch (EmployeeNotFoundException e) {
             return "Can't remove, employee does not exist";
         }
     }
@@ -50,7 +51,7 @@ public class EmployeeService {
                     return employee;
                 }
             }
-            throw new EmployeeNotFoundException("No such employee exists");
+            throw new EmployeeNotFoundException();
         } catch (EmployeeNotFoundException e) {
             return null;
         }

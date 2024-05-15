@@ -13,6 +13,10 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
+    @GetMapping
+    public String printList() {
+        return employeeService.employees.toString();
+    }
     @GetMapping(path="/add")
     public String add(@RequestParam(value = "firstName") String firstName,
                       @RequestParam(value = "lastName") String lastName) {
@@ -23,7 +27,7 @@ public class EmployeeController {
                       @RequestParam(value = "lastName") String lastName) {
         return employeeService.removeEmployee(firstName,lastName);
     }
-    @GetMapping(path="/add")
+    @GetMapping(path="/find")
     public String find(@RequestParam(value = "firstName") String firstName,
                       @RequestParam(value = "lastName") String lastName) {
         return employeeService.findEmployee(firstName,lastName);
