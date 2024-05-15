@@ -22,11 +22,16 @@ public class EmployeeService {
         }
     }
     public String findEmployee(String firstName, String lastName) {
-        for (Employee employee : employees) {
-            if (employee.getFirstName().equalsIgnoreCase(firstName) &&
-                    employee.getLastName().equalsIgnoreCase(lastName)) {
-                return employee.toString();
+        try {
+            for (Employee employee : employees) {
+                if (employee.getFirstName().equalsIgnoreCase(firstName) &&
+                        employee.getLastName().equalsIgnoreCase(lastName)) {
+                    return employee.toString();
+                }
             }
+            throw new EmployeeNotFoundException("No such employee exists");
+        } catch (EmployeeNotFoundException e) {
+            return e.getMessage();
         }
     }
 
