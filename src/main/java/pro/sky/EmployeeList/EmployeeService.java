@@ -14,11 +14,15 @@ public class EmployeeService {
         try {
             if (employees.size() >= MAX_EMPLOYEE_QUANTITY) {
                 throw new EmployeeStorageIsFullException("Employee Storage Is Full");
-            } else {
+            } else if (findByName(firstName,lastName) == null) {
                 employees.add(new Employee(firstName, lastName));
                 return "Employee added";
+            } else {
+                throw new EmployeeAlreadyAddedException("Employee already added");
             }
-        } catch (EmployeeNotFoundException e) {
+        } catch (EmployeeStorageIsFullException e) {
+            return e.getMessage();
+        } catch (EmployeeAlreadyAddedException e) {
             return e.getMessage();
         }
     }
