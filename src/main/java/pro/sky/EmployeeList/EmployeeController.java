@@ -15,7 +15,7 @@ public class EmployeeController {
     }
     @GetMapping
     public String printList() {
-        return employeeService.employees.toString();
+        return employeeService.printEmployees();
     }
     @GetMapping(path="/add")
     public String add(@RequestParam(value = "firstName") String firstName,
