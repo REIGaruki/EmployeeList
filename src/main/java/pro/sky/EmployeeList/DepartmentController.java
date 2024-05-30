@@ -13,8 +13,12 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
     @GetMapping(path="/all")
-    public String printEmployeesInDepartment(@RequestParam(value="departmentId") Integer departmentId) {
-        return departmentService.printEmployeesInDepartment(departmentId);
+    public String printEmployeesInDepartment(@RequestParam(value="departmentId", required = false) Integer departmentId) {
+        if (departmentId == null) {
+            return departmentService.printDepartments();
+        } else {
+            return departmentService.printEmployeesInDepartment(departmentId);
+        }
    }
     @GetMapping(path="/max-salary")
     public String printEmployeeWithMaximalSalary(@RequestParam(value="departmentId") int departmentId) {
