@@ -51,5 +51,17 @@ public class EmployeeService {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
         return values.toString();
     }
+    public String printEmployeesInDepartment(int dept) {
+        ArrayList<Employee> values = new ArrayList<>(employees.values());
+        return values.toString();
+    }
+    public String printEmployeeWithMaximalSalary(int dept) {
+        ArrayList<Employee> values = new ArrayList<>(employees.values());
+        return values.toString();
+    }
+    public String printEmployeeWithMinimalSalary(int dept) {
+        ArrayList<Employee> values = new ArrayList<>(employees.values());
+        return values.toString();
+    }
 
 }
