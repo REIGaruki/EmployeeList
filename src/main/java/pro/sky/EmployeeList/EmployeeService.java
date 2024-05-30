@@ -47,5 +47,9 @@ public class EmployeeService {
         }
         throw new EmployeeNotFoundException();
     }
+    public String printDepartments() {
+        ArrayList<Employee> values = new ArrayList<>(employees.values());
+        return values.toString();
+    }
 
 }
