@@ -69,7 +69,11 @@ public class EmployeeService {
     }
     public String printEmployeeWithMinimalSalary(int dept) {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
-        return values.toString();
+        Employee min = values.stream().filter(
+                        (Employee value) -> value.getDepartment() == departmentList.get(dept))
+                .min(Comparator.comparing(employee -> employee.getSalary()))
+                .orElseThrow(() -> new RuntimeException());
+        return min.getFirstName() + ' ' + min.getLastName();
     }
 
 }

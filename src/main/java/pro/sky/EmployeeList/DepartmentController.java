@@ -27,7 +27,8 @@ public class DepartmentController {
     }
     @GetMapping(path="/min-salary")
     public String printEmployeeWithMinimalSalary(@RequestParam(value="departmentId") int departmentId) {
-        return departmentService.printEmployeeWithMinimalSalary(departmentId) + "is a " + departmentId + "slave";
+        return departmentService.printEmployeeWithMinimalSalary(departmentId) +
+                " has minimal salary in the " + departmentService.departmentList.get(departmentId).getDeptName();
     }
 }
 
