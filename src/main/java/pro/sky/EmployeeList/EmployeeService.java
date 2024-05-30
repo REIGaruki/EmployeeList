@@ -61,7 +61,10 @@ public class EmployeeService {
     }
     public String printEmployeeWithMaximalSalary(int dept) {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
-        return values.toString();
+        Employee max = values.stream().
+                max(Comparator.comparing(employee -> employee.getSalary()))
+                .orElseThrow(() -> new RuntimeException(""));
+        return max.toString();
     }
     public String printEmployeeWithMinimalSalary(int dept) {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
