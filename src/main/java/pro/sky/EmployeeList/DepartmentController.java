@@ -13,13 +13,9 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
     @GetMapping(path="/all")
-    public String printList() {
-        return departmentService.printDepartments();
-    }
-    @GetMapping(path="/all")
-    public String printDepartment(@RequestParam(value="departmentId") int departmentId) {
+    public String printEmployeesInDepartment(@RequestParam(value="departmentId") int departmentId) {
         return departmentService.printEmployeesInDepartment(departmentId);
-    }
+   }
     @GetMapping(path="/max-salary")
     public String printEmployeeWithMaximalSalary(@RequestParam(value="departmentId") int departmentId) {
         return departmentService.printEmployeeWithMaximalSalary(departmentId);

@@ -11,9 +11,9 @@ public class EmployeeService {
             new Department("Dungeon")
     ));
     public Map<String, Employee> employees = new HashMap<>(Map.of(
-            "VanDarkholme", new Employee("Van", "Darkholme", 300, departmentList.get(1)),
-            "BillyHerrington", new Employee("Billy", "Herrington", 250, departmentList.get(0)),
-            "DannyLee", new Employee("Danny", "Lee", 255, departmentList.get(0))
+            "VanDarkholme", new Employee("Van", "Darkholme", 3, departmentList.get(1)),
+            "BillyHerrington", new Employee("Billy", "Herrington", 3, departmentList.get(0)),
+            "DannyLee", new Employee("Danny", "Lee", 2, departmentList.get(0))
     ));
 
     private final int MAX_EMPLOYEE_QUANTITY = 4;
@@ -23,7 +23,7 @@ public class EmployeeService {
         return values.toString();
     }
 
-    public String addEmployee(String firstName, String lastName, double salary, int dept) {
+    public String addEmployee(String firstName, String lastName, int salary, int dept) {
             if (employees.size() >= MAX_EMPLOYEE_QUANTITY) {
                 throw new EmployeeStorageIsFullException("Employee Storage Is Full");
             } else if (employees.containsKey(firstName + lastName)) {

@@ -12,7 +12,7 @@ public class Department {
     }
     @Override
     public String toString() {
-        return deptName + " отдел";
+        return "Department: " + deptName;
     }
     @Override
     public boolean equals(Object o) {
