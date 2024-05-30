@@ -22,7 +22,8 @@ public class DepartmentController {
    }
     @GetMapping(path="/max-salary")
     public String printEmployeeWithMaximalSalary(@RequestParam(value="departmentId") int departmentId) {
-        return "Boss of the " + departmentId + " is " + departmentService.printEmployeeWithMaximalSalary(departmentId);
+        return "Boss of the " + departmentService.departmentList.get(departmentId).getDeptName() +
+                " is " + departmentService.printEmployeeWithMaximalSalary(departmentId);
     }
     @GetMapping(path="/min-salary")
     public String printEmployeeWithMinimalSalary(@RequestParam(value="departmentId") int departmentId) {
