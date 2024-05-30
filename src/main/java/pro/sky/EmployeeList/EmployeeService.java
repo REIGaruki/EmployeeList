@@ -3,6 +3,7 @@ package pro.sky.EmployeeList;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -51,9 +52,12 @@ public class EmployeeService {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
         return values.toString();
     }
-    public String printEmployeesInDepartment(int dept) {
+    public String printEmployeesInDepartment(Integer dept) {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
-        return values.toString();
+        List<Employee> employeesInDepartment = values.stream().filter(
+                (Employee value) -> value.getDepartment() == departmentList.get(dept))
+                .collect(Collectors.toList());
+        return employeesInDepartment.toString();
     }
     public String printEmployeeWithMaximalSalary(int dept) {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
