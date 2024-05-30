@@ -6,10 +6,14 @@ import java.util.*;
 
 @Service
 public class EmployeeService {
+    public List<Department> departmentList = new ArrayList<>(List.of(
+            new Department("Gym"),
+            new Department("Dungeon")
+    ));
     public Map<String, Employee> employees = new HashMap<>(Map.of(
-            "VanDarkholme", new Employee("Van", "Darkholme"),
-            "BillyHerrington", new Employee("Billy", "Herrington"),
-            "DannyLee", new Employee("Danny", "Lee")
+            "VanDarkholme", new Employee("Van", "Darkholme", 300, departmentList.get(1)),
+            "BillyHerrington", new Employee("Billy", "Herrington", 250, departmentList.get(0)),
+            "DannyLee", new Employee("Danny", "Lee", 255, departmentList.get(0))
     ));
 
     private final int MAX_EMPLOYEE_QUANTITY = 4;
@@ -25,7 +29,7 @@ public class EmployeeService {
             } else if (employees.containsKey(firstName + lastName)) {
                 throw new EmployeeAlreadyAddedException("Employee already added");
             } else {
-                employees.put(firstName + lastName, new Employee(firstName, lastName));
+                employees.put(firstName + lastName, new Employee(firstName, lastName, 0, departmentList.get(0)));
                 return "Employee added";
             }
     }
