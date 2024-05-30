@@ -23,13 +23,13 @@ public class EmployeeService {
         return values.toString();
     }
 
-    public String addEmployee(String firstName, String lastName) {
+    public String addEmployee(String firstName, String lastName, double salary, int dept) {
             if (employees.size() >= MAX_EMPLOYEE_QUANTITY) {
                 throw new EmployeeStorageIsFullException("Employee Storage Is Full");
             } else if (employees.containsKey(firstName + lastName)) {
                 throw new EmployeeAlreadyAddedException("Employee already added");
             } else {
-                employees.put(firstName + lastName, new Employee(firstName, lastName, 0, departmentList.get(0)));
+                employees.put(firstName + lastName, new Employee(firstName, lastName, salary, departmentList.get(dept)));
                 return "Employee added";
             }
     }

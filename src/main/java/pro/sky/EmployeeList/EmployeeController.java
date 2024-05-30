@@ -18,9 +18,13 @@ public class EmployeeController {
         return employeeService.printEmployees();
     }
     @GetMapping(path="/add")
-    public String add(@RequestParam(value = "firstName") String firstName,
-                      @RequestParam(value = "lastName") String lastName) {
-        return employeeService.addEmployee(firstName,lastName);
+    public String add(
+            @RequestParam(value = "firstName") String firstName,
+            @RequestParam(value = "lastName") String lastName,
+            @RequestParam(value = "salary") double salary,
+            @RequestParam(value = "dept") int dept
+            ) {
+        return employeeService.addEmployee(firstName,lastName, salary, dept);
     }
     @GetMapping(path="/remove")
     public String remove(@RequestParam(value = "firstName") String firstName,
