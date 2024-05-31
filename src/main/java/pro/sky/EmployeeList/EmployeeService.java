@@ -19,9 +19,9 @@ public class EmployeeService {
 
     private final int MAX_EMPLOYEE_QUANTITY = 4;
 
-    public String printEmployees() {
+    public List<Employee> printEmployees() {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
-        return values.toString();
+        return values;
     }
 
     public String addEmployee(String firstName, String lastName, int salary, int dept) {
@@ -42,22 +42,22 @@ public class EmployeeService {
                 throw new EmployeeNotFoundException();
             }
     }
-    public String findEmployee(String firstName, String lastName) {
+    public Employee findEmployee(String firstName, String lastName) {
         if (employees.containsKey(firstName + lastName)) {
-            return employees.get(firstName + lastName).toString();
+            return employees.get(firstName + lastName);
         }
         throw new EmployeeNotFoundException();
     }
-    public String printDepartments() {
+    public List<Employee> printDepartments() {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
-        return values.toString();
+        return values;
     }
-    public String printEmployeesInDepartment(Integer dept) {
+    public List<Employee> printEmployeesInDepartment(Integer dept) {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
         List<Employee> employeesInDepartment = values.stream().filter(
                 (Employee value) -> value.getDepartment() == departmentList.get(dept))
                 .collect(Collectors.toList());
-        return employeesInDepartment.toString();
+        return employeesInDepartment;
     }
     public String printEmployeeWithMaximalSalary(int dept) {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
@@ -70,7 +70,7 @@ public class EmployeeService {
     public String printEmployeeWithMinimalSalary(int dept) {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
         Employee min = values.stream().filter(
-                        (Employee value) -> value.getDepartment() == departmentList.get(dept))
+                (Employee value) -> value.getDepartment() == departmentList.get(dept))
                 .min(Comparator.comparing(employee -> employee.getSalary()))
                 .orElseThrow(() -> new RuntimeException());
         return min.getFirstName() + ' ' + min.getLastName();

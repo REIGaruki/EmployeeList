@@ -15,9 +15,9 @@ public class DepartmentController {
     @GetMapping(path="/all")
     public String printEmployeesInDepartment(@RequestParam(value="departmentId", required = false) Integer departmentId) {
         if (departmentId == null) {
-            return departmentService.printDepartments();
+            return departmentService.printDepartments().toString();
         } else {
-            return departmentService.printEmployeesInDepartment(departmentId);
+            return departmentService.printEmployeesInDepartment(departmentId).toString();
         }
    }
     @GetMapping(path="/max-salary")

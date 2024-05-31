@@ -15,7 +15,7 @@ public class EmployeeController {
     }
     @GetMapping
     public String printList() {
-        return employeeService.printEmployees();
+        return employeeService.printEmployees().toString();
     }
     @GetMapping(path="/add")
     public String add(
@@ -34,7 +34,7 @@ public class EmployeeController {
     @GetMapping(path="/find")
     public String find(@RequestParam(value = "firstName") String firstName,
                       @RequestParam(value = "lastName") String lastName) {
-        return employeeService.findEmployee(firstName,lastName);
+        return employeeService.findEmployee(firstName,lastName).toString();
     }
 
 }
