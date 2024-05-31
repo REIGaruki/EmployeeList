@@ -22,12 +22,14 @@ public class DepartmentController {
    }
     @GetMapping(path="/max-salary")
     public String printEmployeeWithMaximalSalary(@RequestParam(value="departmentId") int departmentId) {
+        Employee max = departmentService.printEmployeeWithMaximalSalary(departmentId);
         return "Boss of the " + departmentService.departmentList.get(departmentId).getDeptName() +
-                " is " + departmentService.printEmployeeWithMaximalSalary(departmentId);
+                " is " + max.getFirstName() + ' ' + max.getLastName();
     }
     @GetMapping(path="/min-salary")
     public String printEmployeeWithMinimalSalary(@RequestParam(value="departmentId") int departmentId) {
-        return departmentService.printEmployeeWithMinimalSalary(departmentId) +
+        Employee min = departmentService.printEmployeeWithMinimalSalary(departmentId);
+        return min.getFirstName() + ' ' + min.getLastName() +
                 " has minimal salary in the " + departmentService.departmentList.get(departmentId).getDeptName();
     }
 }

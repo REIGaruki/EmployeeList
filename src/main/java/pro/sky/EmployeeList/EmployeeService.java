@@ -59,21 +59,21 @@ public class EmployeeService {
                 .collect(Collectors.toList());
         return employeesInDepartment;
     }
-    public String printEmployeeWithMaximalSalary(int dept) {
+    public Employee printEmployeeWithMaximalSalary(int dept) {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
         Employee max = values.stream().filter(
                 (Employee value) -> value.getDepartment() == departmentList.get(dept))
                 .max(Comparator.comparing(employee -> employee.getSalary()))
                 .orElseThrow(() -> new RuntimeException());
-        return max.getFirstName() + ' ' + max.getLastName();
+        return max;
     }
-    public String printEmployeeWithMinimalSalary(int dept) {
+    public Employee printEmployeeWithMinimalSalary(int dept) {
         ArrayList<Employee> values = new ArrayList<>(employees.values());
         Employee min = values.stream().filter(
                 (Employee value) -> value.getDepartment() == departmentList.get(dept))
                 .min(Comparator.comparing(employee -> employee.getSalary()))
                 .orElseThrow(() -> new RuntimeException());
-        return min.getFirstName() + ' ' + min.getLastName();
+        return min;
     }
 
 }
