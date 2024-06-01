@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path="/departments")
 public class DepartmentController {
-    private final EmployeeService departmentService;
-    public DepartmentController(EmployeeService departmentService) {
+    private final DepartmentService departmentService;
+    public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
     @GetMapping(path="/all")
@@ -23,14 +23,14 @@ public class DepartmentController {
     @GetMapping(path="/max-salary")
     public String printEmployeeWithMaximalSalary(@RequestParam(value="departmentId") int departmentId) {
         Employee max = departmentService.printEmployeeWithMaximalSalary(departmentId);
-        return "Boss of the " + departmentService.departmentList.get(departmentId).getDeptName() +
+        return "Boss of the " + EmployeeListApplication.departmentList.get(departmentId).getDeptName() +
                 " is " + max.getFirstName() + ' ' + max.getLastName();
     }
     @GetMapping(path="/min-salary")
     public String printEmployeeWithMinimalSalary(@RequestParam(value="departmentId") int departmentId) {
         Employee min = departmentService.printEmployeeWithMinimalSalary(departmentId);
         return min.getFirstName() + ' ' + min.getLastName() +
-                " has minimal salary in the " + departmentService.departmentList.get(departmentId).getDeptName();
+                " has minimal salary in the " + EmployeeListApplication.departmentList.get(departmentId).getDeptName();
     }
 }
 

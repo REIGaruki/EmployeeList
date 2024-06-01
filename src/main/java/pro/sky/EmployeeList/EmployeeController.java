@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path="/employee")
 public class EmployeeController {
-    private final EmployeeService employeeService;
+    private EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -21,8 +21,8 @@ public class EmployeeController {
     public String add(
             @RequestParam(value = "firstName") String firstName,
             @RequestParam(value = "lastName") String lastName,
-            @RequestParam(value = "salary") int salary,
-            @RequestParam(value = "dept") int dept
+            @RequestParam(value = "salary", required = false) Integer salary,
+            @RequestParam(value = "dept", required = false) Integer dept
             ) {
         return employeeService.addEmployee(firstName,lastName, salary, dept);
     }
