@@ -1,9 +1,11 @@
-package pro.sky.EmployeeList;
+package pro.sky.EmployeeList.department;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pro.sky.EmployeeList.employee.Employee;
+import pro.sky.EmployeeList.EmployeeListApplication;
 
 @RestController
 @RequestMapping(path="/departments")

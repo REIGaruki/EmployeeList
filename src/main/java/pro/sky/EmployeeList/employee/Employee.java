@@ -1,4 +1,6 @@
-package pro.sky.EmployeeList;
+package pro.sky.EmployeeList.employee;
+
+import pro.sky.EmployeeList.department.Department;
 
 import java.util.Objects;
 
