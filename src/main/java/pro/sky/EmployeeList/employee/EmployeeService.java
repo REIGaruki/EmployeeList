@@ -15,7 +15,7 @@ public class EmployeeService{
         return values;
     }
 
-    public String addEmployee(String firstName, String lastName, Integer salary, Integer dept) {
+    public List<Employee> addEmployee(String firstName, String lastName, Integer salary, Integer dept) {
         if (salary == null) {
             salary = 0;
         }
@@ -27,14 +27,15 @@ public class EmployeeService{
         } else if (EmployeeListApplication.employees.containsKey(firstName + lastName)) {
             throw new EmployeeAlreadyAddedException("Employee already added");
         } else {
-            EmployeeListApplication.employees.put(firstName + lastName, new Employee(firstName, lastName, salary, EmployeeListApplication.departmentList.get(dept)));
-            return "Employee added";
+            EmployeeListApplication.employees.put(firstName + lastName,
+                    new Employee(firstName, lastName, salary, EmployeeListApplication.departmentList.get(dept)));
+            return new ArrayList<>(EmployeeListApplication.employees.values());
         }
     }
-    public String removeEmployee(String firstName, String lastName) {
+    public List<Employee> removeEmployee(String firstName, String lastName) {
             if (EmployeeListApplication.employees.containsKey(firstName + lastName)) {
                 EmployeeListApplication.employees.remove(firstName + lastName);
-                return "Employee removed";
+                return new ArrayList<>(EmployeeListApplication.employees.values());
             } else {
                 throw new EmployeeNotFoundException();
             }

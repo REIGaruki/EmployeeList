@@ -1,15 +1,9 @@
 package pro.sky.EmployeeList;
 
-import ch.qos.logback.core.joran.spi.ElementPath;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pro.sky.EmployeeList.department.Department;
 import pro.sky.EmployeeList.employee.Employee;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
