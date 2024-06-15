@@ -1,5 +1,6 @@
 package pro.sky.EmployeeList.employee;
 
+import org.apache.commons.lang3.StringUtils;
 import pro.sky.EmployeeList.department.Department;
 
 import java.util.Objects;
@@ -11,8 +12,13 @@ public class Employee {
     private Department department;
 
     public Employee(String firstName, String lastName, int salary, Department department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        setFirstName(firstName);
+        setLastName(lastName);
+        if (StringUtils.isAlpha(lastName)) {
+            this.lastName = StringUtils.capitalize(lastName);
+        } else {
+            throw new UnallowedSymbolsExeption("LastName contains unallowed characters");
+        }
         this.salary = salary;
         this.department = department;
     }
@@ -22,7 +28,11 @@ public class Employee {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        if (StringUtils.isAlpha(firstName)) {
+            this.firstName = StringUtils.capitalize(firstName);
+        } else {
+            throw new UnallowedSymbolsExeption("FirstName contains unallowed characters");
+        }
     }
 
     public String getLastName() {
@@ -30,7 +40,11 @@ public class Employee {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        if (StringUtils.isAlpha(lastName)) {
+            this.lastName = StringUtils.capitalize(lastName);
+        } else {
+            throw new UnallowedSymbolsExeption("LastName contains unallowed characters");
+        }
     }
 
     @Override
