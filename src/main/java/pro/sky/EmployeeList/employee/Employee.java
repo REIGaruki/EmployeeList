@@ -14,11 +14,6 @@ public class Employee {
     public Employee(String firstName, String lastName, int salary, Department department) {
         setFirstName(firstName);
         setLastName(lastName);
-        if (StringUtils.isAlpha(lastName)) {
-            this.lastName = StringUtils.capitalize(lastName);
-        } else {
-            throw new UnallowedSymbolsExeption("LastName contains unallowed characters");
-        }
         this.salary = salary;
         this.department = department;
     }
@@ -29,7 +24,7 @@ public class Employee {
 
     public void setFirstName(String firstName) {
         if (StringUtils.isAlpha(firstName)) {
-            this.firstName = StringUtils.capitalize(firstName);
+            this.firstName = StringUtils.capitalize(StringUtils.lowerCase(firstName));
         } else {
             throw new UnallowedSymbolsExeption("FirstName contains unallowed characters");
         }
@@ -41,7 +36,7 @@ public class Employee {
 
     public void setLastName(String lastName) {
         if (StringUtils.isAlpha(lastName)) {
-            this.lastName = StringUtils.capitalize(lastName);
+            this.lastName = StringUtils.capitalize(StringUtils.lowerCase(lastName));
         } else {
             throw new UnallowedSymbolsExeption("LastName contains unallowed characters");
         }
