@@ -1,42 +1,14 @@
 package pro.sky.EmployeeList.department;
 
-import org.springframework.stereotype.Service;
 import pro.sky.EmployeeList.employee.Employee;
-import pro.sky.EmployeeList.EmployeeListApplication;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Map;
 
-@Service
-public class DepartmentService{
-
-    public List<Employee> printDepartments() {
-        ArrayList<Employee> employeeList = new ArrayList<>();
-        for (int i = 0; i < EmployeeListApplication.departmentList.size(); i++) {
-            employeeList.addAll(printEmployeesInDepartment(i));
-        }
-        return employeeList;
-    }
-    public List<Employee> printEmployeesInDepartment(Integer dept) {
-        ArrayList<Employee> values = new ArrayList<>(EmployeeListApplication.employees.values());
-        List<Employee> employeesInDepartment = values.stream().filter(
-                        (Employee value) -> value.getDepartment() == EmployeeListApplication.departmentList.get(dept))
-                .collect(Collectors.toList());
-        return employeesInDepartment;
-    }
-    public Employee printEmployeeWithMaximalSalary(int dept) {
-        ArrayList<Employee> values = new ArrayList<>(EmployeeListApplication.employees.values());
-        return values.stream().filter(
-                        (Employee value) -> value.getDepartment() == EmployeeListApplication.departmentList.get(dept))
-                .max(Comparator.comparing(employee -> employee.getSalary()))
-                .orElseThrow(() -> new RuntimeException());
-    }
-    public Employee printEmployeeWithMinimalSalary(int dept) {
-        ArrayList<Employee> values = new ArrayList<>(EmployeeListApplication.employees.values());
-        return values.stream().filter(
-                        (Employee value) -> value.getDepartment() == EmployeeListApplication.departmentList.get(dept))
-                .min(Comparator.comparing(employee -> employee.getSalary()))
-                .orElseThrow(() -> new RuntimeException());
-    }
-
+public interface DepartmentService {
+    Map<Integer, List<Employee>> printDepartments();
+    List<Employee> printEmployeesInDepartment(Integer dept);
+    int printMaximalSalary(int dept);
+    int printMinimalSalary(int dept);
+    int printDepartmentSalary(int dept);
 }

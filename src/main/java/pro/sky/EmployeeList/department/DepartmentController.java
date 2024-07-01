@@ -1,35 +1,38 @@
 package pro.sky.EmployeeList.department;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.EmployeeList.employee.Employee;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping(path="/departments")
+@RequestMapping("/department")
 public class DepartmentController {
     private final DepartmentService departmentService;
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
-    @GetMapping(path="/all")
-    public List<Employee> printEmployeesInDepartment(@RequestParam(value="departmentId", required = false) Integer departmentId) {
-        if (departmentId == null) {
-            return departmentService.printDepartments();
-        } else {
-            return departmentService.printEmployeesInDepartment(departmentId);
-        }
-   }
-    @GetMapping(path="/max-salary")
-    public Employee printEmployeeWithMaximalSalary(@RequestParam(value="departmentId") int departmentId) {
-        return departmentService.printEmployeeWithMaximalSalary(departmentId);
+    @GetMapping(path="/{id}/employees")
+    public List<Employee> printEmployeesInDepartment(
+            @PathVariable("id") int departmentId) {
+        return departmentService.printEmployeesInDepartment(departmentId);
     }
-    @GetMapping(path="/min-salary")
-    public Employee printEmployeeWithMinimalSalary(@RequestParam(value="departmentId") int departmentId) {
-        return departmentService.printEmployeeWithMinimalSalary(departmentId);
+    @GetMapping(path="/employees")
+    public Map<Integer, List<Employee>> printEmployees() {
+        return departmentService.printDepartments();
+    }
+    @GetMapping(path="/{id}/salary/max")
+    public int printMaximalSalary(@PathVariable("id") int departmentId) {
+        return departmentService.printMaximalSalary(departmentId);
+    }
+    @GetMapping(path="/{id}/salary/min")
+    public int printMinimalSalary(@PathVariable("id") int departmentId) {
+        return departmentService.printMinimalSalary(departmentId);
+    }
+    @GetMapping(path="/{id}/salary/sum")
+    public int printDepartmentSalary(@PathVariable("id") int departmentId) {
+        return departmentService.printDepartmentSalary(departmentId);
     }
 }
 
