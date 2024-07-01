@@ -11,7 +11,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeServiceTest {
-    EmployeeService sut = new EmployeeService();
+    EmployeeService sut = new EmployeeService(4);
     private final List<Department> departmentList = new ArrayList<>(List.of(
             new Department("Gym"),
             new Department("Dungeon")
@@ -55,7 +55,7 @@ class EmployeeServiceTest {
     }
     @Test
     void addEmployeeWithNoEmptySpace() {
-        Map<String, Employee> actual = sut.addEmployee("Mark", "Wolff",null,null);
+        sut.setMaxEmployeeQuantity(3);
         Assertions.assertThrows(EmployeeStorageIsFullException.class, () -> sut.addEmployee(
                 "Danny", "Lee",null,null));
     }
@@ -93,5 +93,29 @@ class EmployeeServiceTest {
     void findEmployeeThatNotExist() {
         Assertions.assertThrows(EmployeeNotFoundException.class, () -> sut.findEmployee(
                 "Mark", "Wolff"));
+    }
+
+    @Test
+    void setMaxEmployeeQuantity() {
+        sut.setMaxEmployeeQuantity(5);
+        int expected = 5;
+        int actual = sut.getMaxEmployeeQuantity();
+        Assertions.assertEquals(expected,actual);
+        sut.setMaxEmployeeQuantity(4);
+        expected = 4;
+        actual = sut.getMaxEmployeeQuantity();
+        Assertions.assertEquals(expected,actual);
+        sut.setMaxEmployeeQuantity(3);
+        expected = 3;
+        actual = sut.getMaxEmployeeQuantity();
+        Assertions.assertEquals(expected,actual);
+        sut.setMaxEmployeeQuantity(2);
+        expected = 3;
+        actual = sut.getMaxEmployeeQuantity();
+        Assertions.assertEquals(expected,actual);
+    }
+    @BeforeEach
+    void printSUT() {
+        System.out.println(sut.employees);
     }
 }
