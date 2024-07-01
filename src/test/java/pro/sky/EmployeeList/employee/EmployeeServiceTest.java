@@ -116,6 +116,11 @@ class EmployeeServiceTest {
     }
     @BeforeEach
     void printSUT() {
-        System.out.println(sut.employees);
+        sut = new EmployeeService(4);
+        sut.employees = new HashMap<>(Map.of(
+                StringUtils.lowerCase(EMPLOYEE_1.getFirstName() + EMPLOYEE_1.getLastName()), EMPLOYEE_1,
+                StringUtils.lowerCase(EMPLOYEE_2.getFirstName() + EMPLOYEE_2.getLastName()), EMPLOYEE_2,
+                StringUtils.lowerCase(EMPLOYEE_3.getFirstName() + EMPLOYEE_3.getLastName()), EMPLOYEE_3
+        ));
     }
 }
