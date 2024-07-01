@@ -15,7 +15,7 @@ public class DepartmentController {
     }
     @GetMapping(path="/{id}/employees")
     public List<Employee> printEmployeesInDepartment(
-            @PathVariable("id") int departmentId) {
+            @PathVariable("id") Integer departmentId) {
         return departmentService.printEmployeesInDepartment(departmentId);
     }
     @GetMapping(path="/employees")
@@ -23,15 +23,15 @@ public class DepartmentController {
         return departmentService.printDepartments();
     }
     @GetMapping(path="/{id}/salary/max")
-    public int printMaximalSalary(@PathVariable("id") int departmentId) {
+    public int printMaximalSalary(@PathVariable("id") Integer departmentId) {
         return departmentService.printMaximalSalary(departmentId);
     }
     @GetMapping(path="/{id}/salary/min")
-    public int printMinimalSalary(@PathVariable("id") int departmentId) {
+    public int printMinimalSalary(@PathVariable("id") Integer departmentId) {
         return departmentService.printMinimalSalary(departmentId);
     }
     @GetMapping(path="/{id}/salary/sum")
-    public int printDepartmentSalary(@PathVariable("id") int departmentId) {
+    public int printDepartmentSalary(@PathVariable("id") Integer departmentId) {
         return departmentService.printDepartmentSalary(departmentId);
     }
 }

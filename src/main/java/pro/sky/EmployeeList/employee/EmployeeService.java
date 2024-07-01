@@ -21,7 +21,11 @@ public class EmployeeService{
     private int maxEmployeeQuantity;
 
     public EmployeeService(int maxEmployeeQuantity) {
-        this.maxEmployeeQuantity = maxEmployeeQuantity;
+        if (employees.size() < maxEmployeeQuantity) {
+            this.maxEmployeeQuantity = maxEmployeeQuantity;
+        } else {
+            this.maxEmployeeQuantity = employees.size() + 1;
+        }
     }
 
     public void setMaxEmployeeQuantity(int maxEmployeeQuantity) {
@@ -72,6 +76,10 @@ public class EmployeeService{
         }
         throw new EmployeeNotFoundException();
     }
-
-
+    public int getDepartmentQuantity() {
+        return departmentList.size();
+    }
+    public Department getDept(int dept) {
+        return departmentList.get(dept);
+    }
 }
