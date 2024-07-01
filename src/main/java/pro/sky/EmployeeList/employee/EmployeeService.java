@@ -11,12 +11,11 @@ public class EmployeeService{
 
     private final int MAX_EMPLOYEE_QUANTITY = 4;
 
-    public List<Employee> printEmployees() {
-        ArrayList<Employee> values = new ArrayList<>(EmployeeListApplication.employees.values());
-        return values;
+    public Map<String, Employee> printEmployees() {
+        return EmployeeListApplication.employees;
     }
 
-    public List<Employee> addEmployee(String firstName, String lastName, Integer salary, Integer dept) {
+    public Map<String, Employee> addEmployee(String firstName, String lastName, Integer salary, Integer dept) {
         if (salary == null) {
             salary = 0;
         }
@@ -31,14 +30,14 @@ public class EmployeeService{
         } else {
             EmployeeListApplication.employees.put(key,
                     new Employee(firstName, lastName, salary, EmployeeListApplication.departmentList.get(dept)));
-            return new ArrayList<>(EmployeeListApplication.employees.values());
+            return EmployeeListApplication.employees;
         }
     }
-    public List<Employee> removeEmployee(String firstName, String lastName) {
+    public Map<String, Employee> removeEmployee(String firstName, String lastName) {
         String key = StringUtils.lowerCase(firstName + lastName);
             if (EmployeeListApplication.employees.containsKey(key)) {
                 EmployeeListApplication.employees.remove(key);
-                return new ArrayList<>(EmployeeListApplication.employees.values());
+                return EmployeeListApplication.employees;
             } else {
                 throw new EmployeeNotFoundException();
             }

@@ -18,9 +18,9 @@ public class EmployeeListApplication {
 			new Department("Dungeon")
 	));
 	public static Map<String, Employee> employees = new HashMap<>(Map.of(
-			"VanDarkholme", new Employee("Van", "Darkholme", 3, departmentList.get(1)),
-			"BillyHerrington", new Employee("Billy", "Herrington", 3, departmentList.get(0)),
-			"DannyLee", new Employee("Danny", "Lee", 2, departmentList.get(0))
+			"vandarkholme", new Employee("Van", "Darkholme", 3, departmentList.get(1)),
+			"billyherrington", new Employee("Billy", "Herrington", 3, departmentList.get(0)),
+			"dannylee", new Employee("Danny", "Lee", 2, departmentList.get(0))
 	));
 
 	public static void main(String[] args) {
