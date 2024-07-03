@@ -8,7 +8,7 @@ import java.util.*;
 
 @Service
 public class EmployeeService{
-    public static List<Department> departmentList = new ArrayList<>(List.of(
+    private static List<Department> departmentList = new ArrayList<>(List.of(
             new Department("Gym"),
             new Department("Dungeon")
     ));
