@@ -2,21 +2,47 @@ package pro.sky.EmployeeList.employee;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import pro.sky.EmployeeList.EmployeeListApplication;
+import pro.sky.EmployeeList.department.Department;
 
 import java.util.*;
 
 @Service
 public class EmployeeService{
+    private static List<Department> departmentList = new ArrayList<>(List.of(
+            new Department("Gym"),
+            new Department("Dungeon")
+    ));
+    public static Map<String, Employee> employees = new HashMap<>(Map.of(
+            "vandarkholme", new Employee("Van", "Darkholme", 3, departmentList.get(1)),
+            "billyherrington", new Employee("Billy", "Herrington", 3, departmentList.get(0)),
+            "dannylee", new Employee("Danny", "Lee", 2, departmentList.get(0))
+    ));
 
-    private final int MAX_EMPLOYEE_QUANTITY = 4;
+    private int maxEmployeeQuantity;
 
-    public List<Employee> printEmployees() {
-        ArrayList<Employee> values = new ArrayList<>(EmployeeListApplication.employees.values());
-        return values;
+    public EmployeeService(int maxEmployeeQuantity) {
+        if (employees.size() < maxEmployeeQuantity) {
+            this.maxEmployeeQuantity = maxEmployeeQuantity;
+        } else {
+            this.maxEmployeeQuantity = employees.size() + 1;
+        }
     }
 
-    public List<Employee> addEmployee(String firstName, String lastName, Integer salary, Integer dept) {
+    public void setMaxEmployeeQuantity(int maxEmployeeQuantity) {
+        if (employees.size() <= maxEmployeeQuantity) {
+            this.maxEmployeeQuantity = maxEmployeeQuantity;
+        }
+    }
+
+    public int getMaxEmployeeQuantity() {
+        return maxEmployeeQuantity;
+    }
+
+    public Map<String, Employee> printEmployees() {
+        return employees;
+    }
+
+    public Map<String, Employee> addEmployee(String firstName, String lastName, Integer salary, Integer dept) {
         if (salary == null) {
             salary = 0;
         }
@@ -24,32 +50,36 @@ public class EmployeeService{
             dept = 0;
         }
         String key = StringUtils.lowerCase(firstName + lastName);
-        if (EmployeeListApplication.employees.size() >= MAX_EMPLOYEE_QUANTITY) {
+        if (employees.size() >= maxEmployeeQuantity) {
             throw new EmployeeStorageIsFullException("Employee Storage Is Full");
-        } else if (EmployeeListApplication.employees.containsKey(key)) {
+        } else if (employees.containsKey(key)) {
             throw new EmployeeAlreadyAddedException("Employee already added");
         } else {
-            EmployeeListApplication.employees.put(key,
-                    new Employee(firstName, lastName, salary, EmployeeListApplication.departmentList.get(dept)));
-            return new ArrayList<>(EmployeeListApplication.employees.values());
+            employees.put(key,
+                    new Employee(firstName, lastName, salary, departmentList.get(dept)));
+            return employees;
         }
     }
-    public List<Employee> removeEmployee(String firstName, String lastName) {
+    public Map<String, Employee> removeEmployee(String firstName, String lastName) {
         String key = StringUtils.lowerCase(firstName + lastName);
-            if (EmployeeListApplication.employees.containsKey(key)) {
-                EmployeeListApplication.employees.remove(key);
-                return new ArrayList<>(EmployeeListApplication.employees.values());
+            if (employees.containsKey(key)) {
+                employees.remove(key);
+                return employees;
             } else {
                 throw new EmployeeNotFoundException();
             }
     }
     public Employee findEmployee(String firstName, String lastName) {
         String key = StringUtils.lowerCase(firstName + lastName);
-        if (EmployeeListApplication.employees.containsKey(key)) {
-            return EmployeeListApplication.employees.get(key);
+        if (employees.containsKey(key)) {
+            return employees.get(key);
         }
         throw new EmployeeNotFoundException();
     }
-
-
+    public int getDepartmentQuantity() {
+        return departmentList.size();
+    }
+    public Department getDept(int dept) {
+        return departmentList.get(dept);
+    }
 }

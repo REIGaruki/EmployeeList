@@ -8,7 +8,7 @@ import java.util.Map;
 public interface DepartmentService {
     Map<Integer, List<Employee>> printDepartments();
     List<Employee> printEmployeesInDepartment(Integer dept);
-    int printMaximalSalary(int dept);
-    int printMinimalSalary(int dept);
-    int printDepartmentSalary(int dept);
+    int printMaximalSalary(Integer dept);
+    int printMinimalSalary(Integer dept);
+    int printDepartmentSalary(Integer dept);
 }
